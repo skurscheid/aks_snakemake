@@ -17,11 +17,11 @@ import os
 import fnmatch
 from snakemake.exceptions import MissingInputException
 
-home = os.environ['HOME']
-dataDir = home + "/Data/Tremethick/kubernetes_test/"
+# home = os.environ['HOME']
+# dataDir = home + "/Data/Tremethick/kubernetes_test/"
 
 #singularity: "docker://skurscheid/snakemake_baseimage:0.1"
-singularity: "docker://continuumio/miniconda3:4.4.10"
+#singularity: "docker://continuumio/miniconda3:4.4.10"
 
 rule run_fastp:
     conda:
@@ -31,12 +31,12 @@ rule run_fastp:
     threads:
         4
     input:
-        read1 = dataDir + "fastq/" + "{library}_L2_1.fq.gz",
-        read2 = dataDir + "fastq/" + "{library}_L2_2.fq.gz"
+        read1 = "fastq/" + "{library}_L2_1.fq.gz",
+        read2 = "fastq/" + "{library}_L2_2.fq.gz"
     output:
-        trimmed_read1 = dataDir + "fastp/trimmed/{library}.end1.fastq.gz",
-        trimmed_read2 = dataDir + "fastp/trimmed/{library}.end2.fastq.gz",
-        report_html = dataDir + "fastp/report/{library}.fastp.html",
-        report_json = dataDir + "fastp/report/{library}.fastp.json"
+        trimmed_read1 = "fastp/trimmed/{library}.end1.fastq.gz",
+        trimmed_read2 = "fastp/trimmed/{library}.end2.fastq.gz",
+        report_html = "fastp/report/{library}.fastp.html",
+        report_json = "fastp/report/{library}.fastp.json"
     shell:
         "fastp -i {input.read1} -I {input.read2} -o {output.trimmed_read1} -O {output.trimmed_read2} --html {output.report_html} --json {output.report_json} --thread {threads}"
