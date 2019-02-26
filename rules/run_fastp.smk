@@ -18,6 +18,7 @@ import fnmatch
 from snakemake.exceptions import MissingInputException
 
 home = os.environ['HOME']
+dataDir = home + "/Data/Tremethick/kubernetes_test/"
 
 #singularity: "docker://skurscheid/snakemake_baseimage:0.1"
 singularity: "docker://continuumio/miniconda3:4.4.10"
