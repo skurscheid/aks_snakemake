@@ -5,12 +5,12 @@ import os
 
 home = os.environ['HOME']
 dataDir = home + "/Data/Tremethick/kubernetes_test/"
-
+#workdir = "/data/cellcycledata/aks_test"
 #configfile: "config.yaml"
 
 rule all:
     input:
-       expand(dataDir + "fastp/trimmed/{library}.{suffix}",
+       expand("fastp/trimmed/{library}.{suffix}",
               library = "ACTR6G1-1",
               suffix = ["end1.fastq.gz", "end2.fastq.gz"])
 
